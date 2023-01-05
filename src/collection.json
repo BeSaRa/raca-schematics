@@ -1,9 +1,10 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "raca-schematics": {
-      "description": "A blank schematic.",
-      "factory": "./raca-schematics/index#racaSchematics"
+    "ng-add": {
+      "description": "default RACA Schematic",
+      "factory": "./ng-add/index#ngAdd",
+      "hidden": true
     }
   }
 }

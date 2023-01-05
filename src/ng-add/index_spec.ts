@@ -4,13 +4,14 @@ import * as path from 'path';
 
 const collectionPath = path.join(__dirname, '../collection.json');
 
-describe('raca-schematics', () => {
+describe('ng-add', () => {
   it('works', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
     const tree = await runner
-      .runSchematicAsync('raca-schematics', {}, Tree.empty())
+      .runSchematicAsync('ng-add', {}, Tree.empty())
       .toPromise();
 
+    console.log(tree.files);
     expect(tree.files).toEqual([]);
   });
 });
