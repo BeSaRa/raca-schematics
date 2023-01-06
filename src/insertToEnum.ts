@@ -1,9 +1,12 @@
-import * as ts from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
 import {Change, InsertChange} from "@schematics/angular/utility/change";
 import {SchematicsException} from "@angular-devkit/schematics";
 import {findNode} from "@schematics/angular/utility/ast-utils";
+import {
+    EnumDeclaration,
+    SyntaxKind
+} from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
 
-export function appendToEnum(node: ts.EnumDeclaration, key: string, value?: number | string): Change {
+export function insertToEnum(node: EnumDeclaration, key: string, value?: number | string): Change {
     const hasComma = node.members.hasTrailingComma;
     const lastNode = node.members.length ? node.members[node.members.length - 1] : node
     const path = node.getSourceFile().fileName;
@@ -13,7 +16,7 @@ export function appendToEnum(node: ts.EnumDeclaration, key: string, value?: numb
     if (!key)
         throw new SchematicsException('Please Provide the Enum Key');
 
-    const exists = findNode(node, ts.SyntaxKind.Identifier, key)
+    const exists = findNode(node, SyntaxKind.Identifier, key)
 
     if (exists)
         throw new SchematicsException(`the enum key exists before ${key}`);
