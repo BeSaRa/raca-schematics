@@ -1,12 +1,12 @@
 import {Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
 import {
-    ArrayLiteralExpression,
     createSourceFile,
+    ObjectLiteralExpression,
     ScriptTarget
 } from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
 import {findNodeValue} from "../findNodeValue";
-import {insertToArray} from "../insertToArray";
 import {changeCommitter} from "../changeCommitter";
+import {insertToObject} from "../insertToObject";
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
 export function ngAdd(_options: any): Rule {
@@ -34,15 +34,19 @@ export function ngAdd(_options: any): Rule {
         // applyToUpdateRecorder(recorder, [change])
         // tree.commitUpdate(recorder)
 
-        const path = 'app/permissionGroup.ts'
+        const path = 'app/urls.ts'
         const content = tree.readText(path);
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)
-        const array = findNodeValue<ArrayLiteralExpression>(source, 'remittanceServicesPermissionsGroup')
-        if (!array) {
+        const object = findNodeValue<ObjectLiteralExpression>(source, 'urlsList')
+        if (!object) {
             return tree
         }
+
         changeCommitter(tree, () => {
-            return insertToArray(array, 'EServicePermissionsEnum.PROJECT_FUNDRAISING')
+            return [
+                insertToObject(object, 'SERVICE_URL', '/admin/smart-admin'),
+                insertToObject(object, 'SERVICE_URL', '/admin/smart-admin')
+            ]
         })
         return tree
     };
