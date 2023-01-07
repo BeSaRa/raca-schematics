@@ -1,12 +1,13 @@
-import {Rule, SchematicContext, Tree} from '@angular-devkit/schematics';
+import {Rule, SchematicContext, SchematicsException, Tree} from '@angular-devkit/schematics';
 import {
-    createSourceFile,
-    ObjectLiteralExpression,
-    ScriptTarget
+    Block,
+    createSourceFile, isArrowFunction,
+    ScriptTarget,
+    SyntaxKind
 } from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
-import {findNodeValue} from "../findNodeValue";
+import {findNodes} from "@schematics/angular/utility/ast-utils";
+import {insertStatement} from "../insertStatement";
 import {changeCommitter} from "../changeCommitter";
-import {insertToObject} from "../insertToObject";
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
 export function ngAdd(_options: any): Rule {
@@ -34,20 +35,26 @@ export function ngAdd(_options: any): Rule {
         // applyToUpdateRecorder(recorder, [change])
         // tree.commitUpdate(recorder)
 
-        const path = 'app/urls.ts'
+        const path = 'app/service-change.ts'
         const content = tree.readText(path);
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)
-        const object = findNodeValue<ObjectLiteralExpression>(source, 'urlsList')
-        if (!object) {
-            return tree
-        }
+        const blocks = findNodes(source, isArrowFunction, 1)
 
+        if (!blocks.length) {
+            throw new SchematicsException('Please ')
+        }
+        const block = blocks[0].body as Block
         changeCommitter(tree, () => {
-            return [
-                insertToObject(object, 'SERVICE_URL', '/admin/smart-admin'),
-                insertToObject(object, 'SERVICE_URL', '/admin/smart-admin')
-            ]
+            const statement = 'DynamicComponentService.registerComponent(\'OrganizationsEntitiesSupportComponent\', OrganizationsEntitiesSupportComponent);'
+            return insertStatement(block, statement)
         })
+        // blocks.forEach((item, index) => {
+        //     console.log(`========BLOCK (${index}) START==============`);
+        //     console.log(item.getFullText());
+        //     console.log(`========BLOCK (${index}) END==============`);
+        //     console.log(item);
+        // })
+
         return tree
     };
 }
