@@ -1,7 +1,7 @@
 {
   "name": "raca-schematics",
   "version": "1.0.4",
-  "description": "A blank schematics",
+  "description": "Electronic Service Schematics for RACA",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine src/**/*_spec.js",
