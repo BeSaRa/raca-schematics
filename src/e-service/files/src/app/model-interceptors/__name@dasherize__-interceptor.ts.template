@@ -1,0 +1,12 @@
+import {IModelInterceptor} from "@contracts/i-model-interceptor";
+import {<%= classify(name)%>} from "@app/models/<%=dasherize(name)%>";
+
+export class <%= classify(name)%>Interceptor implements IModelInterceptor<<%= classify(name)%>> {
+  send(model: Partial<<%= classify(name)%>>): Partial<<%= classify(name)%>> {
+    return model;
+  }
+
+  receive(model: <%= classify(name)%>): <%= classify(name)%> {
+    return model;
+  }
+}

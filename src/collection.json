@@ -5,6 +5,11 @@
       "description": "default RACA Schematic",
       "factory": "./ng-add/index#ngAdd",
       "hidden": true
+    },
+    "e-service": {
+      "description": "A blank schematic.",
+      "factory": "./e-service/index#eService",
+      "schema": "./e-service/schema.json"
     }
   }
 }

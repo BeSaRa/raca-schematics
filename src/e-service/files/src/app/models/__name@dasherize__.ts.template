@@ -1,0 +1,18 @@
+import {CaseModel} from "@app/models/case-model";
+import {<%= classify(name) %>Service} from "@services/<%= dasherize(name)%>.service";
+import {InterceptModel} from "@decorators/intercept-model";
+import {FactoryService} from "@services/factory.service";
+import {<%= classify(name) %>Interceptor} from "@model-interceptors/<%= dasherize(name)%>-interceptor";
+import {CaseTypes} from "@app/enums/case-types.enum";
+
+const {send, receive} = new <%= classify(name) %>Interceptor()
+
+@InterceptModel({send, receive})
+export class <%= classify(name) %> extends CaseModel<<%= classify(name) %>Service, <%= classify(name) %>> {
+  service: <%= classify(name) %>Service;
+  caseType = CaseTypes.<%= enumName %>
+  constructor() {
+    super();
+    this.service = FactoryService.getService('<%= classify(name) %>Service')
+  }
+}

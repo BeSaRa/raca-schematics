@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "GenerateNewService",
+  "title": "create scaffold for e-service",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "name of the service",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for service"
+    },
+    "caseType": {
+      "type": "number",
+      "description": "number of case type ",
+      "pattern": "^[0-9]+",
+      "x-prompt": "please provide the caseType"
+    },
+    "endPoint": {
+      "type": "string",
+      "description": "the main endpoint for the service",
+      "x-prompt": "please provide the main endpoint",
+      "default": "/project-implementation"
+    },
+    "underModule": {
+      "type": "string",
+      "description": "choose the main module",
+      "default": "general-services",
+      "enum": [
+        "general-services",
+        "collection",
+        "office-services",
+        "projects",
+        "remittances",
+        "urgent-intervention"
+      ],
+      "x-prompt": {
+        "message": "select the module that you need to put your service under it",
+        "items": [
+          {
+            "value": "general-services",
+            "label": "General"
+          },
+          {
+            "value": "collection",
+            "label": "Collections"
+          },
+          {
+            "value": "office-services",
+            "label": "Offices"
+          },
+          {
+            "value": "projects",
+            "label": "Projects"
+          },
+          {
+            "value": "remittances",
+            "label": "Remittances"
+          },
+          {
+            "value": "urgent-intervention",
+            "label": "Urgent Intervention"
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "name",
+    "endPoint",
+    "caseType",
+    "underModule"
+  ]
+}
