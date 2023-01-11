@@ -10,7 +10,7 @@ import {findNode, findNodes} from "@schematics/angular/utility/ast-utils";
 import {applyToUpdateRecorder, InsertChange} from "@schematics/angular/utility/change";
 
 export function updateAppUrls(urlName: string): Rule {
-    const path = 'app/i-app-urls.ts'
+    const path = 'src/app/i-app-urls.ts'
     return (host: Tree) => {
         const content = host.readText(path);
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)

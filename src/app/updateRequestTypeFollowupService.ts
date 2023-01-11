@@ -11,7 +11,7 @@ import {insertToObject} from "./insertToObject";
 import {applyToUpdateRecorder} from "@schematics/angular/utility/change";
 
 export function updateRequestTypeFollowupService(enumName: string): Rule {
-    const path = 'app/request-type-followup.service.ts'
+    const path = 'src/app/request-type-followup.service.ts'
     return (host: Tree) => {
         const content = host.readText(path)
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)

@@ -18,7 +18,7 @@ export interface modulesMap {
 }
 
 export function updatePermissionGroup(modelName: keyof modulesMap, enumName: string): Rule {
-    const path = 'app/permission-groups.ts'
+    const path = 'src/app/permission-groups.ts'
     const identifiers: modulesMap = {
         "general-services": "generalServicesPermissionsGroup",
         "collection": "collectionServicesPermissionsGroup",
