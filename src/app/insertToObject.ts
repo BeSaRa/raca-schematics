@@ -20,9 +20,9 @@ export function insertToObject(node: ObjectLiteralExpression, key: string, value
 
 
     if (matches) {
-        toAdd = !hasComma ? (`,` + matches[0] + (key + ': ' + `'${value}'`)) : (matches[0] + key + ': ' + `'${value}'`)
+        toAdd = !hasComma ? (`,` + matches[0] + (key + ': ' + `${value}`)) : (matches[0] + key + ': ' + `${value}`)
     } else {
-        toAdd = '\n\t' + (key + ': ' + `'${value}'`) + '\n'
+        toAdd = '\n\t' + (key + ': ' + `${value}`) + '\n'
     }
     return new InsertChange(node.getSourceFile().fileName, position, toAdd)
 }

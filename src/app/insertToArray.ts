@@ -8,7 +8,7 @@ export function insertToArray(node: ArrayLiteralExpression, toAdd: string): Chan
     const matches = lastNode.getFullText().match(/^(\r?\n)(\s*)/);
     const position = (hasComma ? lastNode.getEnd() + 1 : lastNode.getEnd()) + (hasItems ? 0 : -1)
     if (matches) {
-        toAdd = !hasComma ? (`,` + matches[0] + toAdd + matches[0]) : toAdd
+        toAdd = (!hasComma ? ',' : '') + matches[0] + toAdd
     } else {
         toAdd = '\n\t' + toAdd + '\n'
     }

@@ -4,7 +4,7 @@ import {
     ScriptTarget, SyntaxKind
 } from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
 import {findNodes} from "@schematics/angular/utility/ast-utils";
-import {insertToEnum} from "../insertToEnum";
+import {insertToEnum} from "./insertToEnum";
 import {applyToUpdateRecorder} from "@schematics/angular/utility/change";
 
 export function updateCaseType(key: string, value: number): Rule {

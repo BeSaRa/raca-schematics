@@ -1,5 +1,6 @@
 import {strings} from "@angular-devkit/core";
 import {EServiceOptions} from "./e-service-options";
+import {ModulesMap} from "./modulesMap";
 
 export class EServiceOptionsModel implements EServiceOptions {
     fileName: string;
@@ -9,8 +10,9 @@ export class EServiceOptionsModel implements EServiceOptions {
     enumName: string;
     urlName: string;
     endPoint: string;
-    caseType: number
-    underModule: string
+    caseType: number;
+    underModule: keyof ModulesMap
+    menuKey: string;
 
     constructor(options: EServiceOptions) {
         this.init(options.name)
@@ -21,11 +23,11 @@ export class EServiceOptionsModel implements EServiceOptions {
 
     private init(name: string): void {
         this.name = strings.classify(name)
-
         this.fileName = strings.dasherize(this.name)
-        this.servicePath = '@app/services/' + this.fileName + '.service';
-        this.modelPath = '@app/models/' + this.fileName;
+        this.servicePath = '@services/' + this.fileName + '.service';
+        this.modelPath = '@models/' + this.fileName;
         this.enumName = this.urlName = strings.underscore(this.name).toUpperCase()
+        this.menuKey = 'menu_' + strings.underscore(name).toLowerCase()
     }
 
 }

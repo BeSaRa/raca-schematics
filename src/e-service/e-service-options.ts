@@ -1,3 +1,5 @@
+import {ModulesMap} from "./modulesMap";
+
 export interface EServiceOptions {
     caseType: number;
     name: string,
@@ -7,5 +9,6 @@ export interface EServiceOptions {
     modelPath: string
     enumName: string
     urlName: string;
-    underModule: string
+    underModule: keyof ModulesMap
+    menuKey: string
 }
