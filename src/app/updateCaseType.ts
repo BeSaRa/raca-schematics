@@ -8,7 +8,7 @@ import {insertToEnum} from "./insertToEnum";
 import {applyToUpdateRecorder} from "@schematics/angular/utility/change";
 
 export function updateCaseType(key: string, value: number): Rule {
-    const path = './src/app/case-types.ts'
+    const path = 'src/app/enums/case-types.enum.ts'
     return (host: Tree) => {
         const content = host.readText(path);
         const sourceFile = createSourceFile(path, content, ScriptTarget.Latest, true)

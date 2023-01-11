@@ -12,7 +12,7 @@ import {insertToObject} from "./insertToObject";
 import {applyToUpdateRecorder} from "@schematics/angular/utility/change";
 
 export function updateEndPoint(key: string, value: string): Rule {
-    const path = './src/app/urls-list.ts';
+    const path = 'src/app/resources/urls-list.ts';
     return (host: Tree) => {
         const content = host.readText(path);
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)

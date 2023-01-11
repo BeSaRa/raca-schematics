@@ -10,7 +10,7 @@ import {findNodes, insertImport} from "@schematics/angular/utility/ast-utils";
 import {applyToUpdateRecorder, InsertChange} from "@schematics/angular/utility/change";
 
 export function updateGeneralSearchInterceptor(enumName: string, name: string, modelPath: string): Rule {
-    const path = "app/general-search-criteria-interceptor.ts"
+    const path = 'src/app/model-interceptors/general-search-criteria-interceptor.ts'
     return (host) => {
         const content = host.readText(path)
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)
