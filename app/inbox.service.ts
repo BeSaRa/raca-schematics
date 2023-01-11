@@ -152,6 +152,8 @@ export class InboxService {
         this.services.set(CaseTypes.PROJECT_FUNDRAISING, this.projectFundraisingService);
         this.services.set(CaseTypes.ORGANIZATION_ENTITIES_SUPPORT, this.organizationsEntitiesSupportService);
         this.services.set(CaseTypes.WELCOME, this.welcomeService);
+        this.services.set(CaseTypes.WELCOME, this.welcomeService);
+        this.services.set(CaseTypes.WELCOME, this.welcomeService);
     }
 
     @CastResponse(() => QueryResultSet)

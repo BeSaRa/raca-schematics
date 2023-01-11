@@ -1,3 +1,4 @@
 export enum CaseTypes {
-    FIRST
+    FIRST,
+    WELCOME = 150
 }

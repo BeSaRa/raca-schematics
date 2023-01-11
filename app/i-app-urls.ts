@@ -128,5 +128,6 @@ export interface IAppUrls {
   PROJECT_FUNDRAISING: string;
   DEDUCTION_RATIO_ITEM: string;
   ORGANIZATION_ENTITIES_SUPPORT: string;
+  WELCOME: string;
   [index: string]: string;
 }

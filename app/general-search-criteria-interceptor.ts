@@ -33,7 +33,7 @@ import {
 import { ProjectModelInterceptor } from '@app/model-interceptors/project-model-interceptor';
 import { ForeignCountriesProjectsSearchCriteriaInterceptor } from '@app/search-criteria-interceptors/foreign-countries-projects-seach-criteria-interceptor';
 import { EmploymentSearchCriteriaInterceptor } from '@app/search-criteria-interceptors/employment-seach-criteria-interceptor';
-import { Welcome } from '@app/models/welcome';
+import { Welcome } from '@models/welcome';
 
 const interceptors: Map<number, IModelInterceptor<any>> = new Map<number, IModelInterceptor<any>>();
 

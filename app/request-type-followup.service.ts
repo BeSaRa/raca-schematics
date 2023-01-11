@@ -42,7 +42,6 @@ export class RequestTypeFollowupService {
     [CaseTypes.AWARENESS_ACTIVITY_SUGGESTION]: this.lookupService.listByCategory.CollectionRequestType,
     [CaseTypes.ORGANIZATION_ENTITIES_SUPPORT]: this.lookupService.listByCategory.CollectionRequestType,
     [CaseTypes.WELCOME]: this.lookupService.listByCategory.ServiceRequestType
-
   }
 
   constructor(private lookupService: LookupService) {

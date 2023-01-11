@@ -29,7 +29,7 @@ export function eService(_options: EServiceOptions): Rule {
                 ...options,
                 ...strings
             }),
-            move('./src')
+            move('.')
         ])
 
         return chain([
