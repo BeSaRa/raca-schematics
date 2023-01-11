@@ -9,7 +9,7 @@ import {insertToEnum} from "./insertToEnum";
 import {applyToUpdateRecorder} from "@schematics/angular/utility/change";
 
 export function updateServicePermission(key: string, value: string): Rule {
-    const path = 'src/app/e-service-permissions-enum.ts'
+    const path = './src/app/e-service-permissions-enum.ts'
     return (host: Tree) => {
         const content = host.readText(path);
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)

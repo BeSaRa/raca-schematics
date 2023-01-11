@@ -11,7 +11,7 @@ import {strings} from "@angular-devkit/core";
 import {applyToUpdateRecorder, InsertChange} from "@schematics/angular/utility/change";
 
 export function updateInboxService(enumName: string, name: string, servicePath: string): Rule {
-    const path = 'src/app/inbox.service.ts'
+    const path = './src/app/inbox.service.ts'
     return (host) => {
         const content = host.readText(path);
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)
