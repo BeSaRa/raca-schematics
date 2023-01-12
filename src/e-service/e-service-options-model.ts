@@ -28,7 +28,7 @@ export class EServiceOptionsModel implements EServiceOptions {
         this.fileName = this.routeName = strings.dasherize(this.name)
         this.servicePath = '@services/' + this.fileName + '.service';
         this.modelPath = '@models/' + this.fileName;
-        this.interceptorPath = 'model-interceptors/'+ this.fileName +'-interceptor'
+        this.interceptorPath = '@model-interceptors/'+ this.fileName +'-interceptor'
         this.enumName = this.urlName = strings.underscore(this.name).toUpperCase()
         this.menuKey = 'menu_' + strings.underscore(name).toLowerCase()
     }
