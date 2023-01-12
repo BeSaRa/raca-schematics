@@ -6,10 +6,11 @@ import {EServicesGenericComponent} from "@app/generics/e-services-generic-compon
 import {<%= classify(name) %>} from "@app/models/<%= dasherize(name) %>";
 import {LangService} from '@app/services/lang.service';
 import {<%= classify(name) %>Service} from "@services/<%= dasherize(name) %>.service";
-import {Observable} from 'rxjs';
+import {Observable,Subject} from 'rxjs';
 import {DialogService} from "@services/dialog.service";
 import {ToastService} from "@services/toast.service";
 
+// noinspection AngularMissingOrInvalidDeclarationInModule
 @Component({
     selector: '<%= dasherize(name) %>',
     templateUrl: './<%= dasherize(name) %>.component.html',
