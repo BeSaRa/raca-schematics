@@ -11,4 +11,5 @@ export interface EServiceOptions {
     urlName: string;
     underModule: keyof ModulesMap
     menuKey: string
+    routeName: string
 }

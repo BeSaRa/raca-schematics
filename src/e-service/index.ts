@@ -19,6 +19,7 @@ import {updateAppUrls, updateCaseType, updateRequestTypeFollowupService} from ".
 import {updateLanguage} from "../app/updateLanguage";
 import {updateEndPoint} from "../app/updateEndPoint";
 import {strings} from "@angular-devkit/core";
+import {updateMenuItemAndRoutingModule} from "../app/updateMenuItemAndRoutingModule";
 
 export function eService(_options: EServiceOptions): Rule {
     return async (host: Tree, _context: SchematicContext) => {
@@ -34,6 +35,7 @@ export function eService(_options: EServiceOptions): Rule {
 
         return chain([
             updateCaseType(options.enumName, options.caseType),
+            updateMenuItemAndRoutingModule( options.name , options.menuKey , options.enumName , options.underModule , options.routeName),
             updateRequestTypeFollowupService(options.enumName),
             updateAppUrls(options.urlName),
             updateLanguage(options.menuKey),

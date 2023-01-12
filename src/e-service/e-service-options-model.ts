@@ -13,6 +13,7 @@ export class EServiceOptionsModel implements EServiceOptions {
     caseType: number;
     underModule: keyof ModulesMap
     menuKey: string;
+    routeName: string;
 
     constructor(options: EServiceOptions) {
         this.init(options.name)
@@ -23,7 +24,7 @@ export class EServiceOptionsModel implements EServiceOptions {
 
     private init(name: string): void {
         this.name = strings.classify(name)
-        this.fileName = strings.dasherize(this.name)
+        this.fileName = this.routeName = strings.dasherize(this.name)
         this.servicePath = '@services/' + this.fileName + '.service';
         this.modelPath = '@models/' + this.fileName;
         this.enumName = this.urlName = strings.underscore(this.name).toUpperCase()

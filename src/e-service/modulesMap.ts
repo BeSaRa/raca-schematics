@@ -6,3 +6,11 @@ export interface ModulesMap {
     "remittances": string
     "urgent-intervention": string
 }
+
+export interface SelectedModuleOptions {
+    id: number
+    parent: number,
+    group: string,
+    langKey: string,
+    routing: string
+}
