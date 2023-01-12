@@ -45,7 +45,7 @@ const createRoute = (name: string, enumName: string, routeName: string) => {
 }
 
 export function updateMenuItemAndRoutingModule(name: string, menuKey: string, enumName: string, underModule: keyof ModulesMap, routName: string): Rule {
-    const path = 'app/navigation-menu-list.ts'
+    const path = 'src/app/resources/navigation-menu-list.ts'
     const routingPath = 'app/general-services-routing.module.ts' // for testing purpose
     const moduleOptions: Record<keyof ModulesMap, SelectedModuleOptions> = {
         "general-services": {
