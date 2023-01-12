@@ -1,6 +1,6 @@
 {
   "name": "raca-schematics",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Electronic Service Schematics for RACA",
   "scripts": {
     "build": "tsc -p tsconfig.json",
