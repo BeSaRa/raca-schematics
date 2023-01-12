@@ -12,5 +12,6 @@ export interface SelectedModuleOptions {
     parent: number,
     group: string,
     langKey: string,
-    routing: string
+    routing: string,
+    module: string
 }

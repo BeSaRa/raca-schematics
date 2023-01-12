@@ -13,4 +13,6 @@ export interface EServiceOptions {
     menuKey: string
     routeName: string
     interceptorPath: string;
+    approvalName: string
+    approvalPath: string
 }

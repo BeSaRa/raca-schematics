@@ -8,7 +8,7 @@ import {
     ScriptTarget
 } from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
 import {findNodeValue} from "./findNodeValue";
-import {findNodes} from "@schematics/angular/utility/ast-utils";
+import {addDeclarationToModule, findNodes} from "@schematics/angular/utility/ast-utils";
 import {insertToArray} from "./insertToArray";
 import {applyToUpdateRecorder} from "@schematics/angular/utility/change";
 
@@ -44,7 +44,14 @@ const createRoute = (name: string, enumName: string, routeName: string) => {
   }`
 }
 
-export function updateMenuItemAndRoutingModule(name: string, menuKey: string, enumName: string, underModule: keyof ModulesMap, routName: string): Rule {
+export function updateMenuItemAndRoutingModule(name: string,
+                                               menuKey: string,
+                                               enumName: string,
+                                               underModule: keyof ModulesMap,
+                                               routName: string,
+                                               approvalName: string,
+                                               approvalPath: string
+): Rule {
     const path = 'src/app/resources/navigation-menu-list.ts'
     const routingPath = 'app/general-services-routing.module.ts' // for testing purpose
     const moduleOptions: Record<keyof ModulesMap, SelectedModuleOptions> = {
@@ -53,42 +60,48 @@ export function updateMenuItemAndRoutingModule(name: string, menuKey: string, en
             parent: 13,
             group: 'general-services',
             langKey: menuKey,
-            routing: 'src/app/modules/general-services/general-services-routing.module.ts'
+            routing: 'src/app/modules/general-services/general-services-routing.module.ts',
+            module: 'src/app/modules/general-services/general-services.module.ts'
         },
         "collection": {
             id: 0,
             parent: 43,
             group: 'collection',
             langKey: menuKey,
-            routing: 'src/app/modules/collection/collection-routing.module.ts'
+            routing: 'src/app/modules/collection/collection-routing.module.ts',
+            module: 'src/app/modules/collection/collection.module.ts'
         },
         "office-services": {
             id: 0,
             parent: 59,
             group: 'office-services',
             langKey: menuKey,
-            routing: 'src/app/modules/office-services/office-services-routing.module.ts'
+            routing: 'src/app/modules/office-services/office-services-routing.module.ts',
+            module: 'src/app/modules/office-services/office-services.module.ts',
         },
         "projects": {
             id: 0,
             parent: 32,
             group: 'projects',
             langKey: menuKey,
-            routing: 'src/app/modules/projects/projects-routing.module.ts'
+            routing: 'src/app/modules/projects/projects-routing.module.ts',
+            module: 'src/app/modules/projects/projects.module.ts'
         },
         "remittances": {
             id: 0,
             parent: 48,
             group: 'remittance',
             langKey: menuKey,
-            routing: 'src/app/modules/remittances/remittances-routing.module.ts'
+            routing: 'src/app/modules/remittances/remittances-routing.module.ts',
+            module: 'src/app/modules/remittances/remittances.module.ts'
         },
         "urgent-intervention": {
             id: 0,
             parent: 60,
             group: 'urgent-intervention',
             langKey: menuKey,
-            routing: 'src/app/modules/urgent-intervention/urgent-intervention-routing.module.ts'
+            routing: 'src/app/modules/urgent-intervention/urgent-intervention-routing.module.ts',
+            module: 'src/app/modules/urgent-intervention/urgent-intervention.module.ts'
         }
     }
     const selectedOptions = moduleOptions[underModule]
@@ -98,7 +111,8 @@ export function updateMenuItemAndRoutingModule(name: string, menuKey: string, en
         const navigation = findNodeValue<ArrayLiteralExpression>(source, 'navigationMenuList')
         const routingContent = host.readText(selectedOptions.routing)
         const routingSource = createSourceFile(selectedOptions.routing, routingContent, ScriptTarget.Latest, true)
-
+        const moduleContent = host.readText(selectedOptions.module)
+        const moduleSource = createSourceFile(selectedOptions.module, moduleContent, ScriptTarget.Latest, true)
         if (!navigation) {
             throw new SchematicsException('there is no menu navigation list here')
         }
@@ -124,6 +138,12 @@ export function updateMenuItemAndRoutingModule(name: string, menuKey: string, en
         const menuRecorder = host.beginUpdate(path)
         applyToUpdateRecorder(menuRecorder, [menuChange])
         host.commitUpdate(menuRecorder)
+
+        const declareChange = addDeclarationToModule(moduleSource, selectedOptions.module, approvalName, approvalPath)
+        const declareRecorder = host.beginUpdate(selectedOptions.module)
+        applyToUpdateRecorder(declareRecorder, declareChange)
+        host.commitUpdate(declareRecorder)
+
         return host
     }
 }

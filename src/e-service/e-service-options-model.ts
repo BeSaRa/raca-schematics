@@ -15,6 +15,8 @@ export class EServiceOptionsModel implements EServiceOptions {
     underModule: keyof ModulesMap
     menuKey: string;
     routeName: string;
+    approvalName: string;
+    approvalPath: string;
 
     constructor(options: EServiceOptions) {
         this.init(options.name)
@@ -28,9 +30,11 @@ export class EServiceOptionsModel implements EServiceOptions {
         this.fileName = this.routeName = strings.dasherize(this.name)
         this.servicePath = '@services/' + this.fileName + '.service';
         this.modelPath = '@models/' + this.fileName;
-        this.interceptorPath = '@model-interceptors/'+ this.fileName +'-interceptor'
+        this.interceptorPath = '@model-interceptors/' + this.fileName + '-interceptor'
         this.enumName = this.urlName = strings.underscore(this.name).toUpperCase()
         this.menuKey = 'menu_' + strings.underscore(name).toLowerCase()
+        this.approvalName = this.name + 'ApproveTaskPopupComponent';
+        this.approvalPath = `@modules/${this.underModule}/popups/${strings.dasherize(this.name)}-approve-task-popup/${strings.dasherize(this.name)}-approve-task-popup.component`
     }
 
 }

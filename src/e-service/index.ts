@@ -34,8 +34,17 @@ export function eService(_options: EServiceOptions): Rule {
         ])
 
         return chain([
+            mergeWith(templateSource),
             updateCaseType(options.enumName, options.caseType),
-            updateMenuItemAndRoutingModule( options.name , options.menuKey , options.enumName , options.underModule , options.routeName),
+            updateMenuItemAndRoutingModule(
+                options.name,
+                options.menuKey,
+                options.enumName,
+                options.underModule,
+                options.routeName,
+                options.approvalName,
+                options.approvalPath
+            ),
             updateRequestTypeFollowupService(options.enumName),
             updateAppUrls(options.urlName),
             updateLanguage(options.menuKey),
@@ -44,7 +53,6 @@ export function eService(_options: EServiceOptions): Rule {
             updateGeneralSearchInterceptor(options.enumName, options.name, options.interceptorPath),
             updatePermissionGroup(options.underModule, options.enumName),
             updateInboxService(options.enumName, options.name, options.servicePath),
-            mergeWith(templateSource)
         ])
     };
 }
