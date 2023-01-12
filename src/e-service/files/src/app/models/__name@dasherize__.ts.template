@@ -4,13 +4,15 @@ import {InterceptModel} from "@decorators/intercept-model";
 import {FactoryService} from "@services/factory.service";
 import {<%= classify(name) %>Interceptor} from "@model-interceptors/<%= dasherize(name)%>-interceptor";
 import {CaseTypes} from "@app/enums/case-types.enum";
+import {HasLicenseDurationMonthly} from "@contracts/has-license-duration-monthly";
 
 const {send, receive} = new <%= classify(name) %>Interceptor()
 
 @InterceptModel({send, receive})
-export class <%= classify(name) %> extends CaseModel<<%= classify(name) %>Service, <%= classify(name) %>> {
+export class <%= classify(name) %> extends CaseModel<<%= classify(name) %>Service, <%= classify(name) %>> implements HasLicenseDurationMonthly {
   service: <%= classify(name) %>Service;
   caseType = CaseTypes.<%= enumName %>
+  licenseDuration!: number;
   constructor() {
     super();
     this.service = FactoryService.getService('<%= classify(name) %>Service')

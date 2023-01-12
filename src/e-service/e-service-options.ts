@@ -12,4 +12,5 @@ export interface EServiceOptions {
     underModule: keyof ModulesMap
     menuKey: string
     routeName: string
+    interceptorPath: string;
 }

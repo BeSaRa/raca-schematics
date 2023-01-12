@@ -41,7 +41,7 @@ export function eService(_options: EServiceOptions): Rule {
             updateLanguage(options.menuKey),
             updateEndPoint(options.urlName, options.endPoint),
             updateServicePermission(options.enumName, options.enumName),
-            updateGeneralSearchInterceptor(options.enumName, options.name, options.modelPath),
+            updateGeneralSearchInterceptor(options.enumName, options.name, options.interceptorPath),
             updatePermissionGroup(options.underModule, options.enumName),
             updateInboxService(options.enumName, options.name, options.servicePath),
             mergeWith(templateSource)

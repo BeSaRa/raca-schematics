@@ -14,7 +14,7 @@ export function updateGeneralSearchInterceptor(enumName: string, name: string, m
     return (host) => {
         const content = host.readText(path)
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)
-        const statementContent = `interceptors.set(CaseTypes.${enumName}, new ${name}());`;
+        const statementContent = `interceptors.set(CaseTypes.${enumName}, new ${name}Interceptor());`;
         const statements = findNodes(source, (node): node is ExpressionStatement => {
             return isExpressionStatement(node) && isCallExpression(node.expression) && node.expression.expression.getText() === 'interceptors.set'
         });
@@ -28,7 +28,7 @@ export function updateGeneralSearchInterceptor(enumName: string, name: string, m
 
         applyToUpdateRecorder(recorder, [
             change,
-            insertImport(source, path, name, modelPath)
+            insertImport(source, path, name + 'Interceptor', modelPath)
         ])
         host.commitUpdate(recorder)
         return host

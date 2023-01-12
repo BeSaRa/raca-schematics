@@ -19,6 +19,7 @@ import {
 } from "@app/shared/components/approval-form-monthly/approval-form-monthly.component";
 import {<%= classify(name)%>} from "@app/models/<%= dasherize(name)%>";
 
+// noinspection AngularMissingOrInvalidDeclarationInModule
 @Component({
   selector: '<%= dasherize(name)%>-approve-task-popup',
   templateUrl: './<%= dasherize(name)%>-approve-task-popup.component.html',
