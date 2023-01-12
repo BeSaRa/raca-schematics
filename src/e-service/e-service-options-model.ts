@@ -19,10 +19,10 @@ export class EServiceOptionsModel implements EServiceOptions {
     approvalPath: string;
 
     constructor(options: EServiceOptions) {
-        this.init(options.name)
         this.endPoint = options.endPoint
         this.caseType = Number(options.caseType)
         this.underModule = options.underModule
+        this.init(options.name)
     }
 
     private init(name: string): void {
