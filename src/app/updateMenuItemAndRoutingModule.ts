@@ -17,7 +17,7 @@ const createMenuItem = (name: string,
                         options: SelectedModuleOptions) => {
     return `{
     id: ${options.id},
-    langKey: 'menu_${options.langKey}',
+    langKey: '${options.langKey}',
     path: '/home/${options.group}/${strings.dasherize(name)}',
     icon: 'mdi-badge-account-horizontal-outline',
     isSvg: false,
