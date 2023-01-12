@@ -3,13 +3,14 @@ import {Injectable} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {BaseGenericEService} from "@app/generics/base-generic-e-service";
 import {ILanguageKeys} from '@app/interfaces/i-language-keys';
-import {<%= classify(name)%>} from "@app/models/project-fundraising";
+import {<%= classify(name)%>} from "@app/models/<%=dasherize(name)%>";
 import {CastResponseContainer} from "@decorators/cast-response";
 import {FactoryService} from "@services/factory.service";
 import {DialogService} from '@services/dialog.service';
 import {DynamicOptionsService} from '@services/dynamic-options.service';
 import {UrlService} from '@services/url.service';
 import {<%= classify(name)%>ApproveTaskPopupComponent} from "@modules/<%= underModule %>/popups/<%=dasherize(name)%>-approve-task-popup/<%=dasherize(name)%>-approve-task-popup.component";
+import {WFResponseType} from "@app/enums/wfresponse-type.enum";
 @CastResponseContainer({
   $default: {
     model: () => <%= classify(name)%>
