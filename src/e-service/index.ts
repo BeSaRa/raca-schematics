@@ -37,15 +37,7 @@ export function eService(_options: EServiceOptions): Rule {
         return chain([
             mergeWith(templateSource),
             updateCaseType(options.enumName, options.caseType),
-            updateMenuItemAndRoutingModule(
-                options.name,
-                options.menuKey,
-                options.enumName,
-                options.underModule,
-                options.routeName,
-                options.approvalName,
-                options.approvalPath
-            ),
+            updateMenuItemAndRoutingModule(options),
             updateRequestTypeFollowupService(options.enumName),
             updateAppUrls(options.urlName),
             updateLanguage(options.menuKey),

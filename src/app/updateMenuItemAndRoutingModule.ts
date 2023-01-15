@@ -11,6 +11,7 @@ import {findNodeValue} from "./findNodeValue";
 import {addDeclarationToModule, findNodes} from "@schematics/angular/utility/ast-utils";
 import {insertToArray} from "./insertToArray";
 import {applyToUpdateRecorder} from "@schematics/angular/utility/change";
+import {EServiceOptions} from "../e-service/e-service-options";
 
 const createMenuItem = (name: string,
                         enumName: string,
@@ -44,22 +45,14 @@ const createRoute = (name: string, enumName: string, routeName: string) => {
   }`
 }
 
-export function updateMenuItemAndRoutingModule(name: string,
-                                               menuKey: string,
-                                               enumName: string,
-                                               underModule: keyof ModulesMap,
-                                               routName: string,
-                                               approvalName: string,
-                                               approvalPath: string
-): Rule {
+export function updateMenuItemAndRoutingModule(options: EServiceOptions): Rule {
     const path = 'src/app/resources/navigation-menu-list.ts'
-    const routingPath = 'app/general-services-routing.module.ts' // for testing purpose
     const moduleOptions: Record<keyof ModulesMap, SelectedModuleOptions> = {
         "general-services": {
             id: 0,
             parent: 13,
             group: 'general-services',
-            langKey: menuKey,
+            langKey: options.menuKey,
             routing: 'src/app/modules/general-services/general-services-routing.module.ts',
             module: 'src/app/modules/general-services/general-services.module.ts'
         },
@@ -67,7 +60,7 @@ export function updateMenuItemAndRoutingModule(name: string,
             id: 0,
             parent: 43,
             group: 'collection',
-            langKey: menuKey,
+            langKey: options.menuKey,
             routing: 'src/app/modules/collection/collection-routing.module.ts',
             module: 'src/app/modules/collection/collection.module.ts'
         },
@@ -75,7 +68,7 @@ export function updateMenuItemAndRoutingModule(name: string,
             id: 0,
             parent: 59,
             group: 'office-services',
-            langKey: menuKey,
+            langKey: options.menuKey,
             routing: 'src/app/modules/office-services/office-services-routing.module.ts',
             module: 'src/app/modules/office-services/office-services.module.ts',
         },
@@ -83,7 +76,7 @@ export function updateMenuItemAndRoutingModule(name: string,
             id: 0,
             parent: 32,
             group: 'projects',
-            langKey: menuKey,
+            langKey: options.menuKey,
             routing: 'src/app/modules/projects/projects-routing.module.ts',
             module: 'src/app/modules/projects/projects.module.ts'
         },
@@ -91,7 +84,7 @@ export function updateMenuItemAndRoutingModule(name: string,
             id: 0,
             parent: 48,
             group: 'remittance',
-            langKey: menuKey,
+            langKey: options.menuKey,
             routing: 'src/app/modules/remittances/remittances-routing.module.ts',
             module: 'src/app/modules/remittances/remittances.module.ts'
         },
@@ -99,12 +92,12 @@ export function updateMenuItemAndRoutingModule(name: string,
             id: 0,
             parent: 60,
             group: 'urgent-intervention',
-            langKey: menuKey,
+            langKey: options.menuKey,
             routing: 'src/app/modules/urgent-intervention/urgent-intervention-routing.module.ts',
             module: 'src/app/modules/urgent-intervention/urgent-intervention.module.ts'
         }
     }
-    const selectedOptions = moduleOptions[underModule]
+    const selectedOptions = moduleOptions[options.underModule]
     return (host) => {
         const content = host.readText(path)
         const source = createSourceFile(path, content, ScriptTarget.Latest, true)
@@ -129,17 +122,23 @@ export function updateMenuItemAndRoutingModule(name: string,
         const routingArray = variables[0].initializer as ArrayLiteralExpression;
         const menuArray = menuVariables[0].initializer as ArrayLiteralExpression;
 
-        const change = insertToArray(routingArray, createRoute(name, enumName, routName))
+        const change = insertToArray(routingArray, createRoute(options.name, options.enumName, options.routeName))
         const routeRecorder = host.beginUpdate(selectedOptions.routing)
         applyToUpdateRecorder(routeRecorder, [change])
         host.commitUpdate(routeRecorder)
 
-        const menuChange = insertToArray(menuArray, createMenuItem(name, enumName, selectedOptions))
+        const menuChange = insertToArray(menuArray, createMenuItem(options.name, options.enumName, selectedOptions))
         const menuRecorder = host.beginUpdate(path)
         applyToUpdateRecorder(menuRecorder, [menuChange])
         host.commitUpdate(menuRecorder)
 
-        const declareChange = addDeclarationToModule(moduleSource, selectedOptions.module, approvalName, approvalPath)
+
+        const componentDeclarationChange = addDeclarationToModule(moduleSource, selectedOptions.module, (options.name + 'Component'), options.componentPath)
+        const componentDeclarationRecorder = host.beginUpdate(selectedOptions.module)
+        applyToUpdateRecorder(componentDeclarationRecorder, componentDeclarationChange)
+        host.commitUpdate(componentDeclarationRecorder)
+
+        const declareChange = addDeclarationToModule(moduleSource, selectedOptions.module, options.approvalName, options.approvalPath)
         const declareRecorder = host.beginUpdate(selectedOptions.module)
         applyToUpdateRecorder(declareRecorder, declareChange)
         host.commitUpdate(declareRecorder)
