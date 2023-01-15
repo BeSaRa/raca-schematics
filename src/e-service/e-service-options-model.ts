@@ -17,6 +17,7 @@ export class EServiceOptionsModel implements EServiceOptions {
     routeName: string;
     approvalName: string;
     approvalPath: string;
+    componentPath: string;
 
     constructor(options: EServiceOptions) {
         this.endPoint = options.endPoint
@@ -35,6 +36,7 @@ export class EServiceOptionsModel implements EServiceOptions {
         this.menuKey = 'menu_' + strings.underscore(name).toLowerCase()
         this.approvalName = this.name + 'ApproveTaskPopupComponent';
         this.approvalPath = `@modules/${this.underModule}/popups/${strings.dasherize(this.name)}-approve-task-popup/${strings.dasherize(this.name)}-approve-task-popup.component`
+        this.componentPath = `@modules/${this.underModule}/pages/${strings.dasherize(this.name)}/${strings.dasherize(this.name)}.component`
     }
 
 }

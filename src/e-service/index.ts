@@ -20,6 +20,7 @@ import {updateLanguage} from "../app/updateLanguage";
 import {updateEndPoint} from "../app/updateEndPoint";
 import {strings} from "@angular-devkit/core";
 import {updateMenuItemAndRoutingModule} from "../app/updateMenuItemAndRoutingModule";
+import {updateAutoRegisterService} from "../app/updateAutoRegisterService";
 
 export function eService(_options: EServiceOptions): Rule {
     return async (host: Tree, _context: SchematicContext) => {
@@ -53,6 +54,7 @@ export function eService(_options: EServiceOptions): Rule {
             updateGeneralSearchInterceptor(options.enumName, options.name, options.interceptorPath),
             updatePermissionGroup(options.underModule, options.enumName),
             updateInboxService(options.enumName, options.name, options.servicePath),
+            updateAutoRegisterService(options)
         ])
     };
 }

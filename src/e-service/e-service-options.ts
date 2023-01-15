@@ -15,4 +15,5 @@ export interface EServiceOptions {
     interceptorPath: string;
     approvalName: string
     approvalPath: string
+    componentPath: string;
 }
