@@ -64,6 +64,8 @@ import { ProjectFundraisingApproveTaskPopupComponent } from './popups/project-fu
 import {
   ProjectImplementationApproveTaskPopupComponent
 } from "@modules/projects/popups/project-implementation-approve-task-popup/project-implementation-approve-task-popup.component";
+import { WelcomeComponent } from '@modules/general-services/pages/welcome/welcome.component';
+import { WelcomeApproveTaskPopupComponent } from '@modules/general-services/popups/welcome-approve-task-popup/welcome-approve-task-popup.component';
 
 
 @NgModule({
@@ -97,7 +99,9 @@ import {
     TargetedCountriesDistributionComponent,
     TargetedYearsDistributionComponent,
     ProjectFundraisingApproveTaskPopupComponent,
-    ProjectImplementationApproveTaskPopupComponent
+    ProjectImplementationApproveTaskPopupComponent,
+    WelcomeComponent,
+    WelcomeApproveTaskPopupComponent
   ],
   imports: [
     CommonModule,

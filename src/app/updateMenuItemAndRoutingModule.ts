@@ -132,13 +132,16 @@ export function updateMenuItemAndRoutingModule(options: EServiceOptions): Rule {
         applyToUpdateRecorder(menuRecorder, [menuChange])
         host.commitUpdate(menuRecorder)
 
-
         const componentDeclarationChange = addDeclarationToModule(moduleSource, selectedOptions.module, (options.name + 'Component'), options.componentPath)
         const componentDeclarationRecorder = host.beginUpdate(selectedOptions.module)
         applyToUpdateRecorder(componentDeclarationRecorder, componentDeclarationChange)
         host.commitUpdate(componentDeclarationRecorder)
 
-        const declareChange = addDeclarationToModule(moduleSource, selectedOptions.module, options.approvalName, options.approvalPath)
+
+        const latestModuleContent = host.readText(selectedOptions.module)
+        const latestModuleSource = createSourceFile(selectedOptions.module, latestModuleContent, ScriptTarget.Latest, true)
+
+        const declareChange = addDeclarationToModule(latestModuleSource, selectedOptions.module, options.approvalName, options.approvalPath)
         const declareRecorder = host.beginUpdate(selectedOptions.module)
         applyToUpdateRecorder(declareRecorder, declareChange)
         host.commitUpdate(declareRecorder)
