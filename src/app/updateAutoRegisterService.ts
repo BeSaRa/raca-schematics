@@ -23,7 +23,7 @@ export function updateAutoRegisterService(options: EServiceOptions): Rule {
         const statement = `DynamicComponentService.registerComponent('${options.name}Component', ${options.name}Component);`
         const change = insertStatement(block, statement)
         const recorder = host.beginUpdate(path)
-        applyToUpdateRecorder(recorder, [change, insertImport(source, path, options.name, options.componentPath)])
+        applyToUpdateRecorder(recorder, [change, insertImport(source, path, (options.name+'Component'), options.componentPath)])
         host.commitUpdate(recorder)
         return host
     }
