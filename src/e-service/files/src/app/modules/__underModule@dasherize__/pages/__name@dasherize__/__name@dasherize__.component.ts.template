@@ -69,6 +69,7 @@ export class <%= classify(name) %>Component extends EServicesGenericComponent<<%
     }
 
     _afterSave(model: <%= classify(name) %>, saveType: SaveTypes, operation: OperationTypes): void {
+        this.model = model;
         if (
             [OperationTypes.CREATE, OperationTypes.UPDATE].includes(operation) && [SaveTypes.FINAL, SaveTypes.COMMIT].includes(saveType)
         ) {
